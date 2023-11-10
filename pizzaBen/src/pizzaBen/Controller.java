@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.util.*;
+import java.io.*;
+
 
 public class Controller
 {
@@ -171,6 +174,40 @@ public class Controller
 	}
 	public void fill()
 	{
+		File file = new File("H:/11/Java/SchuleJavaGit/pizzaBen/src/pizzaBen/Speisekarte.txt");
+		Scanner sc;
+		
+		try
+		{
+			sc = new Scanner(new FileReader(file));
+			
+			while(sc.hasNextLine())
+			{
+				String line = sc.nextLine();
+				String[] parts = line.split(";");
+				
+				String name = parts[0].trim();
+				int preis = Integer.parseInt(parts[1].trim());
+				
+				
+				pizzaL.add(new Pizza(name,preis));
+			}
+			
+			sc.close();
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("Datei konnte nicht geöffnet werden.");
+		}
+		catch (InputMismatchException e) {
+		    System.out.println("Invalid input format in the file.");
+		}
+		
+		
+		
+		
+		
+		
 		Pizza margaritap = new Pizza("Margarita", 6);
 		Pizza salamip = new Pizza("Salami", 7);
 		Pizza schinkenp = new Pizza("Schinken", 7);
