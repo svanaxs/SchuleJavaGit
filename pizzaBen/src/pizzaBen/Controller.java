@@ -7,6 +7,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.util.*;
 import java.io.*;
@@ -179,14 +180,22 @@ public class Controller
 	}
 	public void fill()
 	{
-		FileSystem fs = FileSystems.getDefault();
-		Path p = fs.getPath("H:/11/Java/SchuleJavaGit/pizzaBen/src/pizzaBen/");
+		//FileSystem fs = FileSystems.getDefault();
+		//Path p = fs.getPath("H:/11/Java/SchuleJavaGit/pizzaBen/src/pizzaBen/");
+		
+		String test;
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(null);
+		test = chooser.getSelectedFile().toString();
+																																
+		
 		
 		Scanner sc;
 		
 		try
 		{
-			sc = new Scanner(new FileReader(p.resolve("Speisekarte.txt").toFile()));
+			//sc = new Scanner(new FileReader(p.resolve("Speisekarte.txt").toFile()));
+			sc = new Scanner(new FileReader(test));
 			
 			while(sc.hasNextLine())
 			{
