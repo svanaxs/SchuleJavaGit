@@ -10,6 +10,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.*;
 import java.io.*;
+import java.nio.*;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class Controller
@@ -174,12 +179,14 @@ public class Controller
 	}
 	public void fill()
 	{
-		File file = new File("H:/11/Java/SchuleJavaGit/pizzaBen/src/pizzaBen/Speisekarte.txt");
+		FileSystem fs = FileSystems.getDefault();
+		Path p = fs.getPath("H:/11/Java/SchuleJavaGit/pizzaBen/src/pizzaBen/");
+		
 		Scanner sc;
 		
 		try
 		{
-			sc = new Scanner(new FileReader(file));
+			sc = new Scanner(new FileReader(p.resolve("Speisekarte.txt").toFile()));
 			
 			while(sc.hasNextLine())
 			{
