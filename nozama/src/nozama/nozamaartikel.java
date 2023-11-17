@@ -8,7 +8,7 @@ public class nozamaartikel
 	
 	
 	
-	public nozamaartikel(String name, int id, float preis)
+	public nozamaartikel( int id, String name, float preis)
 	{
 		this.name = name;
 		this.id = id;
