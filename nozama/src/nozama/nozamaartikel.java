@@ -1,12 +1,21 @@
 package nozama;
 
-public class nozamaartikel
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.io.Serializable;
+
+public class nozamaartikel implements Serializable
 {
 	private String name;
 	private int id;
 	private float preis;
 	
-	
+	public nozamaartikel()
+	{
+		
+	}
 	
 	public nozamaartikel( int id, String name, float preis)
 	{
@@ -44,7 +53,9 @@ public class nozamaartikel
 	@Override
 	public String toString()
 	{
-		return name + preis;
+		return name + " " + preis;
 	}
+	
+	
 
 }

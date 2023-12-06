@@ -28,8 +28,6 @@ public class nozamagui extends JFrame
 	private JButton btnAdd;
 	private JButton btnRemove;
 
-	
-	
 	public nozamagui()
 	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,16 +37,16 @@ public class nozamagui extends JFrame
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("NOZAMA");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblNewLabel.setBounds(10, 11, 156, 67);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblWarenkorn = new JLabel("Warenkorb");
 		lblWarenkorn.setBounds(303, 64, 77, 14);
 		contentPane.add(lblWarenkorn);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Kundennamen");
 		lblNewLabel_1.setBounds(10, 258, 77, 14);
 		contentPane.add(lblNewLabel_1);
@@ -60,69 +58,84 @@ public class nozamagui extends JFrame
 		contentPane.add(getBtnRemove());
 		this.setVisible(true);
 	}
-	protected JList getListVerfugbar() {
-		if (listVerfugbar == null) {
+
+	protected JList getListVerfugbar()
+	{
+		if (listVerfugbar == null)
+		{
 			listVerfugbar = new JList();
 			listVerfugbar.setBounds(10, 89, 190, 148);
 		}
 		return listVerfugbar;
 	}
-	protected JList getListWarenkorb() {
-		if (listWarenkorb == null) {
+
+	protected JList getListWarenkorb()
+	{
+		if (listWarenkorb == null)
+		{
 			listWarenkorb = new JList();
 			listWarenkorb.setBounds(313, 89, 190, 148);
 		}
 		return listWarenkorb;
 	}
-	protected JTextField getTextField() {
-		if (textField == null) {
+
+	protected JTextField getTextField()
+	{
+		if (textField == null)
+		{
 			textField = new JTextField();
 			textField.setColumns(10);
 			textField.setBounds(97, 255, 201, 20);
 		}
 		return textField;
 	}
-	protected JButton getBtnSend() {
-		if (btnSend == null) {
+
+	protected JButton getBtnSend()
+	{
+		if (btnSend == null)
+		{
 			btnSend = new JButton("Abschicken");
 			btnSend.setBounds(323, 254, 89, 23);
 		}
 		return btnSend;
 	}
-	protected JButton getBtnAdd() {
-		if (btnAdd == null) {
+
+	protected JButton getBtnAdd()
+	{
+		if (btnAdd == null)
+		{
 			btnAdd = new JButton("->");
 			btnAdd.setBounds(227, 89, 55, 45);
 		}
 		return btnAdd;
 	}
-	protected JButton getBtnRemove() {
-		if (btnRemove == null) {
+
+	protected JButton getBtnRemove()
+	{
+		if (btnRemove == null)
+		{
 			btnRemove = new JButton("<-");
 			btnRemove.setBounds(227, 177, 55, 45);
 		}
 		return btnRemove;
 	}
 
-
 	public void setListener(Kaufen kaufen)
 	{
 		// TODO Auto-generated method stub
 		getBtnAdd().addActionListener(kaufen);
 	}
-	
+
 	public void setListener(Entfernen Entfernen)
 	{
 		// TODO Auto-generated method stub
 		getBtnRemove().addActionListener(Entfernen);
 	}
-	
+
 	public void setListener(Abschicken Abschicken)
 	{
 		// TODO Auto-generated method stub
 		getBtnSend().addActionListener(Abschicken);
 	}
-	
-	
-	
+
 }

@@ -1,6 +1,5 @@
 package nozama;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -10,7 +9,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
 
 import nozama.nozamagui;
 import nozama.nozamaartikel;
@@ -22,89 +20,104 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.io.Serializable;
 
 public class nozamaController
 {
-	
+
 	private nozamagui gui;
-	
+
 	protected DefaultListModel dlmLager = new DefaultListModel<nozamaartikel>();
 	protected DefaultListModel dlmWarenkorb = new DefaultListModel<nozamaartikel>();
-	
+
 	ArrayList<nozamaartikel> lager = new ArrayList<nozamaartikel>();
 	ArrayList<nozamaartikel> warenkorb = new ArrayList<nozamaartikel>();
-	
-	
+
 	public nozamaController()
 	{
 		gui = new nozamagui();
-		
+
 		gui.getListVerfugbar().setModel(dlmLager);
 		gui.getListWarenkorb().setModel(dlmWarenkorb);
-		
+
 		registriereListener();
 		fill();
 	}
-	
-	
+
 	private void registriereListener()
 	{
 		// TODO Auto-generated method stub
 		gui.setListener(new Kaufen());
 		gui.setListener(new Entfernen());
 		gui.setListener(new Abschicken());
-		
-	}
 
+	}
 
 	public void aktualisieren()
 	{
 	}
-	
-	
+
 	public void fill()
 	{
-		
-		String test;
-		JFileChooser chooser = new JFileChooser();
-		chooser.showOpenDialog(null);
-		test = chooser.getSelectedFile().toString();
-																																
-		
-		
-		Scanner sc;
-		
-		try
+		try (FileInputStream fis = new FileInputStream("products.ser");
+				ObjectInputStream ois = new ObjectInputStream(fis))
 		{
-			
-			sc = new Scanner(new FileReader(test));
-			
-			while(sc.hasNextLine())
+			ArrayList<nozamaartikel> tempList = (ArrayList<nozamaartikel>) ois.readObject();
+			for (nozamaartikel temp : tempList)
 			{
-				String line = sc.nextLine();
-				String[] parts = line.split(";");
 				
-				int id = Integer.parseInt(parts[0].trim());
-				String name = parts[1].trim();
-				int preis = Integer.parseInt(parts[2].trim());
-				
-				nozamaartikel a = new nozamaartikel(id, name,preis);
-				dlmLager.addElement(a);
+				dlmLager.addElement(temp);
 			}
-			
-			sc.close();
 		}
-		catch(FileNotFoundException e)
+		catch (FileNotFoundException e)
 		{
-			System.out.println("Datei konnte nicht geöffnet werden.");
+			System.out.println("File not found: " + e.getMessage());
 		}
-		catch (InputMismatchException e) {
-		    System.out.println("Invalid input format in the file.");
+		catch (IOException | ClassNotFoundException e)
+		{
+			System.out.println("Error reading file: " + e.getMessage());
 		}
-		
-		
+
+		// String test;
+		// JFileChooser chooser = new JFileChooser();
+		// chooser.showOpenDialog(null);
+		// test = chooser.getSelectedFile().toString();
+		//
+		//
+		//
+		// Scanner sc;
+		//
+		// try
+		// {
+		//
+		// sc = new Scanner(new FileReader(test));
+		//
+		// while(sc.hasNextLine())
+		// {
+		// String line = sc.nextLine();
+		// String[] parts = line.split(";");
+		//
+		// int id = Integer.parseInt(parts[0].trim());
+		// String name = parts[1].trim();
+		// int preis = Integer.parseInt(parts[2].trim());
+		//
+		// nozamaartikel a = new nozamaartikel(id, name,preis);
+		// dlmLager.addElement(a);
+		// }
+		//
+		// sc.close();
+		// }
+		// catch(FileNotFoundException e)
+		// {
+		// System.out.println("Datei konnte nicht geöffnet werden.");
+		// }
+		// catch (InputMismatchException e) {
+		// System.out.println("Invalid input format in the file.");
+		// }
+		//
+		//
 	}
+
 	class Kaufen implements ActionListener
 	{
 		@Override
@@ -112,12 +125,12 @@ public class nozamaController
 		{
 			// TODO Auto-generated method stub
 			System.out.println("Kaufen");
-			
-			 nozamaartikel a = (nozamaartikel) gui.getListVerfugbar().getSelectedValue();
-			 dlmWarenkorb.addElement(a);
+
+			nozamaartikel a = (nozamaartikel) gui.getListVerfugbar().getSelectedValue();
+			dlmWarenkorb.addElement(a);
 		}
 	}
-	
+
 	class Entfernen implements ActionListener
 	{
 		@Override
@@ -126,10 +139,10 @@ public class nozamaController
 			// TODO Auto-generated method stub
 			System.out.println("Entfernt");
 			nozamaartikel a = (nozamaartikel) gui.getListWarenkorb().getSelectedValue();
-			 dlmWarenkorb.removeElement(a);
+			dlmWarenkorb.removeElement(a);
 		}
 	}
-	
+
 	class Abschicken implements ActionListener
 	{
 		@Override
@@ -140,7 +153,5 @@ public class nozamaController
 			dlmWarenkorb.clear();
 		}
 	}
-	
-	
 
 }
