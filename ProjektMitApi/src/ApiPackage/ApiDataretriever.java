@@ -64,7 +64,7 @@ public class ApiDataretriever {
             throw new IOException("Error retrieving summoner data. HTTP error code: " + responseCode);
         }
     }
-//ab
+//abc
     private static String getSummonerData(String encryptedSummonerId) throws IOException {
         String apiUrl = RIOT_API_BASE_URL + encryptedSummonerId;
 
