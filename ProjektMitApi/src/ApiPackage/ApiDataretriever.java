@@ -27,7 +27,8 @@ public class ApiDataretriever {
         }
     }
 
-    private static String encodeSummonerName(String summonerName) {
+    private static String encodeSummonerName(String summonerName)
+    {
         return summonerName.replaceAll(" ", "%20");
     }
 
@@ -48,6 +49,7 @@ public class ApiDataretriever {
 
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
+                System.out.println(inputLine);
             }
 
             in.close();
@@ -62,7 +64,7 @@ public class ApiDataretriever {
             throw new IOException("Error retrieving summoner data. HTTP error code: " + responseCode);
         }
     }
-
+//a
     private static String getSummonerData(String encryptedSummonerId) throws IOException {
         String apiUrl = RIOT_API_BASE_URL + encryptedSummonerId;
 
