@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ApiDataretriever {
+public class Fetcher {
 
     private static final String API_KEY = "RGAPI-99af894e-41f6-4d5d-bdfc-3318ed4d60f7";
     private static final String RIOT_API_BASE_URL = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
