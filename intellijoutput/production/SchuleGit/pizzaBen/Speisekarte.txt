@@ -1,7 +1,0 @@
-Pizza EineVersuchung;10
-Quattro Stagnioni;17
-Pizza Tonno;18
-Pizza Ludowiko;99
-vegetarische Pizza;4
-Spaghetti Aglio;4
-Pizza Mary;5
