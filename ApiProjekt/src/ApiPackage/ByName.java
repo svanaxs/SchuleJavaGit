@@ -85,9 +85,22 @@ public class ByName {
     public static ByName fromJson(String json) {
     	
     	Gson gson = new Gson();
-    	System.out.println("Klasse Angelegt");
     	return gson.fromJson(json, ByName.class);
     }
+
+
+	@Override
+	public String toString()
+	{
+		return "By name klasse [ \n id = " + id + ",\n accountId = " + accountId + ",\n puuid = " + puuid + ",\n name = " + name + ",\n profileIconId = " + profileIconId
+																																+ ",\n revisionDate  ="
+																																+ revisionDate
+																																+ ",\n summonerLevel = "
+																																+ summonerLevel
+																																+ "\n]";
+	}
+    
+   
     
 
     

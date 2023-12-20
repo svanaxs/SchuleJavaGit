@@ -14,7 +14,7 @@ public class Fetcher {
     private static final String RIOT_API_BASE_URL = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
 
     public static void main(String[] args) {
-        String summonerName = "FeastOnToxicity";  
+        String summonerName = "Turtolia";  
 
         try {
             String encodedSummonerName = encodeSummonerName(summonerName);
@@ -23,6 +23,8 @@ public class Fetcher {
     
             System.out.println("BySummoner");
             System.out.println(summonerData);
+            BySummoner tempsum = BySummoner.fromJson(summonerData);
+            System.out.println(tempsum);
             
           
         } catch (IOException e) {
@@ -52,10 +54,9 @@ public class Fetcher {
             
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
-                System.out.println("ByName");
   
                 ByName temp = ByName.fromJson(inputLine);
-                System.out.println(temp.getName());
+                System.out.println(temp);
                 
                 System.out.println();
                
