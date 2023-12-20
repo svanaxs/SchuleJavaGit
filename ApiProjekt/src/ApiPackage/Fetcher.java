@@ -10,18 +10,21 @@ import java.net.URL;
 
 public class Fetcher {
 
-    private static final String API_KEY = "RGAPI-99af894e-41f6-4d5d-bdfc-3318ed4d60f7";
+    private static final String API_KEY = "RGAPI-2493a10a-4a0c-4bbb-b1ca-0cbecc2f4953";
     private static final String RIOT_API_BASE_URL = "https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/";
 
     public static void main(String[] args) {
-        String summonerName = "Fates End";  // Replace with the desired summoner name
+        String summonerName = "FeastOnToxicity";  
 
         try {
             String encodedSummonerName = encodeSummonerName(summonerName);
             String encryptedSummonerId = getEncryptedSummonerId(encodedSummonerName);
             String summonerData = getSummonerData(encryptedSummonerId);
-            System.out.println(encodedSummonerName);
-            System.out.println("Summoner Data:\n" + summonerData);
+    
+            System.out.println("BySummoner");
+            System.out.println(summonerData);
+            
+          
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,16 +49,25 @@ public class Fetcher {
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder content = new StringBuilder();
             String inputLine;
-
+            
             while ((inputLine = in.readLine()) != null) {
                 content.append(inputLine);
-                System.out.println(inputLine);
-            }
+                System.out.println("ByName");
+  
+                ByName temp = ByName.fromJson(inputLine);
+                System.out.println(temp.getName());
+                
+                System.out.println();
+               
+            };
+           
+            
+            
+            
 
             in.close();
 
-            // Parse the response to get the encrypted summoner ID
-            // Note: This is a simplified approach; you might want to use a JSON library for parsing in a real-world scenario
+            
             String json = content.toString();
             String encryptedSummonerId = json.split("\"id\"")[1].split(":")[1].split(",")[0].replaceAll("\"", "").trim();
 
@@ -80,7 +92,9 @@ public class Fetcher {
             StringBuilder content = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
+            	
                 content.append(inputLine);
+                
             }
             in.close();
 
@@ -89,4 +103,5 @@ public class Fetcher {
             throw new IOException("Error retrieving summoner data. HTTP error code: " + responseCode);
         }
     }
+    
 }
